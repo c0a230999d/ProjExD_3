@@ -167,13 +167,14 @@ def main():
     score = Score()
     clock = pg.time.Clock()
     tmr = 0
+    add_bomb_interval = 100
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
             if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
                 # スペースキー押下でBeamクラスのインスタンス生成
-                beams.append(Beam(bird)) #beam = Beam(bird)        
+                beams.append(Beam(bird))     
         screen.blit(bg_img, [0, 0])
         for bomb in bombs:
             if bird.rct.colliderect(bomb.rct):
@@ -200,6 +201,8 @@ def main():
         bombs = [bomb for bomb in bombs if bomb is not None]
         beams = [beam for beam in beams if beam is not None]
 
+        if tmr % add_bomb_interval == 0:
+            bombs.append(Bomb((255 , 0, 0), 10))
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
