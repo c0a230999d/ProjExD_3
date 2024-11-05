@@ -198,6 +198,9 @@ def main():
                         bird.change_img(6, screen)
                         pg.display.update()
                         score.add_score(1)
+                    yoko, tate = check_bound(beam.rct)
+                    if not yoko:  
+                        beams[i] = None
         bombs = [bomb for bomb in bombs if bomb is not None]
         beams = [beam for beam in beams if beam is not None]
 
